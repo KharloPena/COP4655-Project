@@ -40,10 +40,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Initial game scene set up
     override func didMove(to view: SKView) {
         
-        //Set up physics world
+        //Sets up physics world
         physicsWorld.contactDelegate = self
         
-        // Creates the play button
+        //Creates the play button
         playButton = SKSpriteNode(imageNamed: "PlayButton")
         playButton.position = CGPoint(x: frame.midX, y: frame.midY)
         playButton.zPosition = 4.0
@@ -58,8 +58,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Define your custom boundaries for x and y
         let minX: CGFloat = -400
         let maxX: CGFloat = -400
-        let minY: CGFloat = -300
-        let maxY: CGFloat = 300
+        let minY: CGFloat = 0
+        let maxY: CGFloat = -550
         
         // Calculate the width and height based on the custom boundaries
         let width = maxX - minX
@@ -252,7 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameStarted = true
         
         //Start obstacle-related actions
-        let waitAction = SKAction.wait(forDuration: 1.5)
+        let waitAction = SKAction.wait(forDuration: 0.5)
         let sequenceAction = SKAction.sequence([spawnAction, waitAction])
         let repeatAction = SKAction.repeatForever(sequenceAction)
         run(repeatAction, withKey: "spawnObstacles")
@@ -262,7 +262,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self?.addScore()
         }
         
-        let delayAction = SKAction.wait(forDuration: 1.0) // Adjust the duration as needed
+        let delayAction = SKAction.wait(forDuration: 1.0)
         let scoreSequence = SKAction.sequence([updateScoreAction, delayAction])
         let scoreRepeatAction = SKAction.repeatForever(scoreSequence)
         run(scoreRepeatAction, withKey: "updateScore")
